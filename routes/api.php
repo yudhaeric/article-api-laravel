@@ -17,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/article', [ArticleController::class, 'index']);
+Route::get('/article/{id}', [ArticleController::class, 'detail']);
