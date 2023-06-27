@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\AuthenticationController;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,5 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/article', [ArticleController::class, 'index']);
-Route::get('/article/{id}', [ArticleController::class, 'detail']);
+Route::get('/article', [ArticleController::class, 'index'])->middleware(['auth:sanctum']);
+Route::get('/article/{id}', [ArticleController::class, 'detail'])->middleware(['auth:sanctum']);
+
+Route::post('/login', [AuthenticationController::class, 'login']);
