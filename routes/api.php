@@ -21,3 +21,4 @@ Route::get('/article', [ArticleController::class, 'index'])->middleware(['auth:s
 Route::get('/article/{id}', [ArticleController::class, 'detail'])->middleware(['auth:sanctum']);
 
 Route::post('/login', [AuthenticationController::class, 'login']);
+Route::get('/logout', [AuthenticationController::class, 'logout'])->middleware(['auth:sanctum']);
