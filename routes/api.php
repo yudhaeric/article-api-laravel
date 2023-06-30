@@ -17,9 +17,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/article', [ArticleController::class, 'index'])->middleware(['auth:sanctum']);
-Route::get('/article/{id}', [ArticleController::class, 'detail'])->middleware(['auth:sanctum']);
+Route::get('/article', [ArticleController::class, 'index']);
+Route::get('/article/{id}', [ArticleController::class, 'detail']);
 
 Route::post('/login', [AuthenticationController::class, 'login']);
-Route::get('/logout', [AuthenticationController::class, 'logout'])->middleware(['auth:sanctum']);
-Route::get('/me', [AuthenticationController::class, 'me'])->middleware(['auth:sanctum']);
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/logout', [AuthenticationController::class, 'logout'])->middleware(['auth:sanctum']);
+    Route::get('/me', [AuthenticationController::class, 'me'])->middleware(['auth:sanctum']);
+    Route::post('/article', [ArticleController::class, 'store']);
+    Route::patch('/article/{id}', [ArticleController::class, 'update'])->middleware(['article-owner']);
+});
+
