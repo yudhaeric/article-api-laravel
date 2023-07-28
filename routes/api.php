@@ -28,4 +28,3 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/article', [ArticleController::class, 'store']);
     Route::patch('/article/{id}', [ArticleController::class, 'update'])->middleware(['article-owner']);
 });
-
