@@ -23,8 +23,9 @@ Route::get('/article/{id}', [ArticleController::class, 'detail']);
 Route::post('/login', [AuthenticationController::class, 'login']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/logout', [AuthenticationController::class, 'logout'])->middleware(['auth:sanctum']);
-    Route::get('/me', [AuthenticationController::class, 'me'])->middleware(['auth:sanctum']);
+    Route::get('/logout', [AuthenticationController::class, 'logout']);
+    Route::get('/me', [AuthenticationController::class, 'me']);
     Route::post('/article', [ArticleController::class, 'store']);
     Route::patch('/article/{id}', [ArticleController::class, 'update'])->middleware(['article-owner']);
+    Route::delete('/article/{id}', [ArticleController::class, 'destroy'])->middleware(['article-owner']);
 });

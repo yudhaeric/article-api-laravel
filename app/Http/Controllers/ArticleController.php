@@ -12,10 +12,6 @@ class ArticleController extends Controller
 {
     public function index() {
         $article = Post::all();
-        // use with
-        // $article = Post::with('author:id,username')->get();
-
-        // use loadMissing
         return PostDetailResource::collection($article->loadMissing('author:id,username'));
     }
 
@@ -44,6 +40,13 @@ class ArticleController extends Controller
 
         $article = Post::findOrFail($id);
         $article->update($request->all());
+
+        return new PostDetailResource($article->loadMissing('author:id,username'));
+    }
+
+    public function destroy($id) {
+        $article = Post::findOrFail($id);
+        $article->delete();
 
         return new PostDetailResource($article->loadMissing('author:id,username'));
     }
